@@ -10,7 +10,12 @@ module.exports = app => {
     );
 
     //handles getting the profile of user when sent back from google
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get('/auth/google/callback', 
+        passport.authenticate('google'),
+        (req, res) => {
+            res.redirect('/surveys');
+        }
+    );
 
     app.get('/api/logout', (req, res) => {
         req.logout();
